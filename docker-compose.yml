@@ -1,0 +1,12 @@
+services:
+  fornos:
+    build: .
+    container_name: fornos
+    restart: unless-stopped
+    read_only: true
+    tmpfs: [/var/cache/nginx, /var/run, /tmp]
+    networks: [npm]   # mesma rede do Nginx Proxy Manager; sem porta publicada
+networks:
+  npm:
+    external: true
+    name: ${NPM_NETWORK:-npm_default}
